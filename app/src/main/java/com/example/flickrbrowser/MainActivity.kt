@@ -49,4 +49,12 @@ class MainActivity : AppCompatActivity() {
     /*companion object{
         private const val TAG = "MainActivity"
     }*/
+    fun onDownloadComlete(data: String,status: DownloadStatus){
+        if (status==DownloadStatus.OK){
+            Log.d(TAG,"onDownloadComplete called,data is $data")
+        }else{
+            // download failed
+            Log.d(TAG,"onDownloadCompleted failed with status $status. Error message is:$data")
+        }
+    }
 }
