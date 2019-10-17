@@ -14,6 +14,10 @@ enum class DownloadStatus {
 class GetRawData (private val listener:MainActivity): AsyncTask<String, Void, String>() {
     private val TAG = "GetRawData"
     private var downloadStatus = DownloadStatus.IDLE
+
+    interface onDownloadComplete{
+        fun onDownloadComplete(data: String,status: DownloadStatus)
+    }
     /*private var listener:MainActivity?=null
 
     fun setDownloadleteListener(callbackObject:MainActivity){
@@ -22,7 +26,7 @@ class GetRawData (private val listener:MainActivity): AsyncTask<String, Void, St
 */
     override fun onPostExecute(result: String) {
         Log.d(TAG,"onPostExecute called, perameter is $result")
-        listener?.onDownloadComlete(result,downloadStatus)
+        listener.onDownloadComlete(result,downloadStatus)
     }
 
     override fun doInBackground(vararg params: String?): String {
