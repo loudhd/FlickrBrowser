@@ -11,7 +11,7 @@ enum class DownloadStatus {
     OK, IDLE, NOT_INITIALISED, FAILED_OR_EMPTY, PERMISSIONS_ERROR, ERROR
 }
 
-class GetRawData (private val listener:MainActivity): AsyncTask<String, Void, String>() {
+class GetRawData (private val listener: onDownloadComplete): AsyncTask<String, Void, String>() {
     private val TAG = "GetRawData"
     private var downloadStatus = DownloadStatus.IDLE
 
@@ -26,7 +26,7 @@ class GetRawData (private val listener:MainActivity): AsyncTask<String, Void, St
 */
     override fun onPostExecute(result: String) {
         Log.d(TAG,"onPostExecute called, perameter is $result")
-        listener.onDownloadComlete(result,downloadStatus)
+        listener.onDownloadComplete(result,downloadStatus)
     }
 
     override fun doInBackground(vararg params: String?): String {
