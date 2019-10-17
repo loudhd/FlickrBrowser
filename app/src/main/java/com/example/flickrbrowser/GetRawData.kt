@@ -1,6 +1,7 @@
 package com.example.flickrbrowser
 
 import android.os.AsyncTask
+import android.os.ProxyFileDescriptorCallback
 import android.util.Log
 import java.io.IOException
 import java.net.MalformedURLException
@@ -13,10 +14,15 @@ enum class DownloadStatus {
 class GetRawData : AsyncTask<String, Void, String>() {
     private val TAG = "GetRawData"
     private var downloadStatus = DownloadStatus.IDLE
+    private var listener:MainActivity?=null
+
+    fun setDownloadleteListener(callbackObject:MainActivity){
+        listener = callbackObject
+    }
 
     override fun onPostExecute(result: String?) {
         Log.d(TAG,"onPostExecute called, perameter is $result")
-       
+
     }
 
     override fun doInBackground(vararg params: String?): String {
