@@ -10,8 +10,19 @@ import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),GetRawData.onDownloadComplete {
+    override fun onDownloadComplete(data: String, status: DownloadStatus) {
+        if (status==DownloadStatus.OK){
+            Log.d(TAG,"onDownloadComplete called,data is $data")
+        }else{
+            // download failed
+            Log.d(TAG,"onDownloadCompleted failed with status $status. Error message is:$data")
+        }
+    }
+
     private val TAG = "MainActivity"
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG,"onCreate calles")
@@ -19,13 +30,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val getRawData = GetRawData()
-        getRawData.execute("https://api.flikr.com/services/feeds/photos_pubilc.gne?tags=android.oreo&format=json&soncallback=1")
 
-        /*fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
+
+        val getRawData = GetRawData(this)
+        getRawData.execute("https://api.flikr.com/services/feeds/photos_pubilc.gne?tags=android.oreo&format=json&soncallback=1")
+        
         Log.d(TAG,"onCreate ends")
     }
 
@@ -45,16 +54,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+
     }
     /*companion object{
         private const val TAG = "MainActivity"
     }*/
-    fun onDownloadComlete(data: String,status: DownloadStatus){
-        if (status==DownloadStatus.OK){
-            Log.d(TAG,"onDownloadComplete called,data is $data")
-        }else{
-            // download failed
-            Log.d(TAG,"onDownloadCompleted failed with status $status. Error message is:$data")
-        }
-    }
+
 }
