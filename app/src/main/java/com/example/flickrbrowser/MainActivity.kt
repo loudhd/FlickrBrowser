@@ -1,5 +1,6 @@
 package com.example.flickrbrowser
 
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -40,5 +41,8 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    companion object{
+        private const val TAG = "MainActivity"
     }
 }
