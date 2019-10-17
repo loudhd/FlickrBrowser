@@ -20,9 +20,9 @@ class GetRawData : AsyncTask<String, Void, String>() {
         listener = callbackObject
     }
 
-    override fun onPostExecute(result: String?) {
+    override fun onPostExecute(result: String) {
         Log.d(TAG,"onPostExecute called, perameter is $result")
-
+        listener?.onDownloadComlete(result,downloadStatus)
     }
 
     override fun doInBackground(vararg params: String?): String {
