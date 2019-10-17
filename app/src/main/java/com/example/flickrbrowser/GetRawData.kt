@@ -9,12 +9,14 @@ import java.net.URL
 enum class DownloadStatus {
     OK, IDLE, NOT_INITIALISED, FAILED_OR_EMPTY, PERMISSIONS_ERROR, ERROR
 }
+
 class GetRawData : AsyncTask<String, Void, String>() {
     private val TAG = "GetRawData"
     private var downloadStatus = DownloadStatus.IDLE
 
     override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
+        Log.d(TAG,"onPostExecute called, perameter is $result")
+       
     }
 
     override fun doInBackground(vararg params: String?): String {
@@ -39,7 +41,8 @@ class GetRawData : AsyncTask<String, Void, String>() {
                 is SecurityException -> {
                     downloadStatus = DownloadStatus.PERMISSIONS_ERROR
                     "doInBackground: Security exception: Needs permission? ${e.message}"
-                } else -> {
+                }
+                else -> {
                     downloadStatus = DownloadStatus.ERROR
                     "Unknown error: ${e.message}"
                 }
