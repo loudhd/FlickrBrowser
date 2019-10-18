@@ -60,5 +60,14 @@ class MainActivity : AppCompatActivity(), GetRawData.onDownloadComplete, GetFlic
             Log.d(TAG, "onDownloadCompleted failed with status $status. Error message is:$data")
         }
     }
+    override fun onDataAvailable(data: List<Photo>) {
+        Log.d(TAG, ".onDataAvailable called, data is $data")
+
+        Log.d(TAG, ".onDataAvailable ends")
+    }
+
+    override fun onError(exception: Exception) {
+        Log.e(TAG, "onError called with ${exception.message}")
+    }
 
 }
