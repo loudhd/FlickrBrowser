@@ -51,13 +51,13 @@ class MainActivity : AppCompatActivity(), GetRawData.onDownloadComplete, GetFlic
     }*/
     override fun onDownloadComplete(data: String, status: DownloadStatus) {
         if (status == DownloadStatus.OK) {
-            Log.d(TAG, "onDownloadComplete called,data is $data")
+            Log.d(TAG, "onDownloadComplete called $data")
             val getFlickrJsonData = GetFlickrJsonData(this)
             getFlickrJsonData.execute(data)
 
         } else {
             // download failed
-            Log.d(TAG, "onDownloadCompleted failed with status $status. Error message is:$data")
+            Log.d(TAG, "onDownloadComplet failed with status $status. Error message is:$data")
         }
     }
     override fun onDataAvailable(data: List<Photo>) {
