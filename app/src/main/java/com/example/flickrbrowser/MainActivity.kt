@@ -10,7 +10,7 @@ import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), GetRawData.onDownloadComplete {
+class MainActivity : AppCompatActivity(), GetRawData.onDownloadComplete, GetFlickrJsonData.onDataAvvailable {
 
     private val TAG = "MainActivity"
 
