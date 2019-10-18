@@ -53,8 +53,7 @@ class MainActivity : AppCompatActivity(), GetRawData.onDownloadComplete, GetFlic
         if (status == DownloadStatus.OK) {
             Log.d(TAG, "onDownloadComplete called $data")
             val getFlickrJsonData = GetFlickrJsonData(this)
-            //getFlickrJsonData.execute(data)
-            getFlickrJsonData.execute("bugus data")
+            getFlickrJsonData.execute(data)
 
         } else {
             // download failed
