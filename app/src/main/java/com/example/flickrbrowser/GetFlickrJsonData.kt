@@ -52,4 +52,12 @@ class GetFlickrJsonData(private val listener:onDataAvvailable):AsyncTask<String,
         Log.d(TAG, ".doInBackground ends")
         return photoList
     }
+
+    override fun onPostExecute(result: ArrayList<Photo>) {
+        Log.d(TAG, "onPostExecute starts")
+        super.onPostExecute(result)
+        listener.onDataAvailable(result)
+        Log.d(TAG, ".onPostExecute ends")
+
+    }
 }
