@@ -1,5 +1,6 @@
 package com.example.flickrbrowser
 
+import android.net.Uri
 import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
@@ -16,17 +17,31 @@ class MainActivity : AppCompatActivity(), GetRawData.onDownloadComplete, GetFlic
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate calles")
+        Log.d(TAG, "onCreate called")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-
+        val url = createUri("https://api.flickr.com/services/feeds/photos_public.gne", "android,oreo","en-us", true)
         val getRawData = GetRawData(this)
-        getRawData.execute("https://api.flikr.com/services/feeds/photos_pubilc.gne?tags=android.oreo&format=json&soncallback=1")
+        getRawData.execute(url)
 
         Log.d(TAG, "onCreate ends")
     }
+
+    private fun createUri(baseURL: String, searchCriteria: String, lang: String, matchAll: Boolean): String {
+        Log.d(TAG, ".createUri starts")
+
+        return Uri.parse(baseURL).
+            buildUpon().
+            appendQueryParameter("tags", searchCriteria).
+            appendQueryParameter("tagmode", if (matchAll) "ALL" else "ANY").
+            appendQueryParameter("lang", lang).
+            appendQueryParameter("format", "json").
+            appendQueryParameter("nojsoncallback", "1").
+            build().toString()
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
